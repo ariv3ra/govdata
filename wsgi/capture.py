@@ -29,8 +29,8 @@ dictFileCont = []  #Defines the content of the JSON data string
 dictMissingState = []
 
 #Setup the database connections
-mconn = Connection(createMongoURI(HOST, str(PORT), DB_USER, DB_PWD, DB_NAME))
-db = mconn
+mconn = Connection(HOST, PORT)
+db = mconn.govdata
 
 print db
 
