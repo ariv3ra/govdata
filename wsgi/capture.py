@@ -30,7 +30,7 @@ dictMissingState = []
 
 #Setup the database connections
 mconn = Connection(createMongoURI(HOST, str(PORT), DB_USER, DB_PWD, DB_NAME))
-db = mconn.dol
+db = mconn
 
 print db
 
