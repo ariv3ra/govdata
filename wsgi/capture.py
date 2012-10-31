@@ -31,6 +31,7 @@ dictMissingState = []
 #Setup the database connections
 mconn = Connection(createMongoURI(HOST, str(PORT), DB_USER, DB_PWD, DB_NAME))
 db = mconn.dol
+
 print db
 
 #get DOL API tokens and secrets
@@ -69,12 +70,6 @@ while isData(DATASET,TABLE,topval,skipval):
         ep = c[start:end]
         
         t = datetime.datetime.utcfromtimestamp(float(ep)/1000.)
-        #fmt = "%Y-%m-%d %H:%M:%S"
-        #fmt = "%Y-%m-%d"
-        
-        fmt = "%Y,%m,%d"
-        print "Time: " + str(t)
-        #d['dateofincident'] = t.strftime(fmt) # Update the date value
         
         d['dateofincident'] = t # Update the date value
 
@@ -89,16 +84,12 @@ while isData(DATASET,TABLE,topval,skipval):
         element = len(comp)-1  #Get the total number of elements minus 1 so it gets the last element
         ch = comp[element].split()  #assign the state and zip values to ch as array
         
-        print "The number of elements in company: " + str(len(comp)) 
-        
         #print "check the failed item and it is = " + str(comp[element].split())
         if ch:
-            print "####   The element is valid - length is:" + str(len(ch))
             d["state"] = ch[0]
             if len(ch) > 1:
                 d["zip"] = ch[1]
         else:
-            print '####   The data is valid don\'t proceed'
             dictMissingState.append(d)
             d["state"] = "unknown"
             
