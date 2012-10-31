@@ -31,6 +31,7 @@ dictMissingState = []
 #Setup the database connections
 mconn = Connection(createMongoURI(HOST, str(PORT), DB_USER, DB_PWD, DB_NAME))
 db = mconn.dol
+print db
 
 #get DOL API tokens and secrets
 fl = open("config")  #Open the config file
@@ -108,8 +109,8 @@ while isData(DATASET,TABLE,topval,skipval):
         # Build the JSON data set       
         dictFileCont.append(d)
         
-        print "Record: " + str(num) 
-        print d
+        #print "Record: " + str(num) 
+        #print d
         
     skipval += 100  # increment the skip value by 100
 '''
