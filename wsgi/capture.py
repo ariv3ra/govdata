@@ -29,7 +29,7 @@ dictFileCont = []  #Defines the content of the JSON data string
 dictMissingState = []
 
 #Setup the database connections
-mconn = Connection(createMongoURI(HOST, PORT, DB_USER, DB_PWD, DB_NAME))
+mconn = Connection(createMongoURI(HOST, str(PORT), DB_USER, DB_PWD, DB_NAME))
 db = mconn.dol
 
 #get DOL API tokens and secrets
