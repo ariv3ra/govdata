@@ -30,9 +30,8 @@ dictMissingState = []
 
 #Setup the database connections
 mconn = Connection(HOST, PORT)
-db = mconn.DB_NAME
+db = mconn[DB_NAME]
 
-print db
 
 #get DOL API tokens and secrets
 fl = open("config")  #Open the config file
@@ -101,7 +100,7 @@ while isData(DATASET,TABLE,topval,skipval):
         dictFileCont.append(d)
         
         #print "Record: " + str(num) 
-        #print d
+        print d
         
     skipval += 100  # increment the skip value by 100
 '''
