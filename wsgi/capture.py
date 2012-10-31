@@ -30,7 +30,7 @@ dictMissingState = []
 
 #Setup the database connections
 mconn = Connection(HOST, PORT)
-db = mconn.govdata
+db = mconn.DB_NAME
 
 print db
 
