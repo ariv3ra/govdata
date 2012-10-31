@@ -29,7 +29,7 @@ dictFileCont = []  #Defines the content of the JSON data string
 dictMissingState = []
 
 #Setup the database connections
-s = "mongodb://" + DB_USER + ":" + DB_PWD + "@" + HOST + ":" + PORT
+s = "mongodb://" + DB_USER + ":" + DB_PWD + "@" + HOST + ":" + str(PORT)
 
 print s
 
