@@ -21,21 +21,18 @@ DB_USER = os.environ['OPENSHIFT_NOSQL_DB_USERNAME']
 DB_PWD = os.environ['OPENSHIFT_NOSQL_DB_PASSWORD']
 DB_NAME = 'govdata' #data base name
 
-def createMongoURI(host, port, user, pwd, dbname):
-    s = "mongodb://" + user + ":" + pwd + "@" + host + ":" + port +"/" + dbname
+def createMongoURI(user, pwd, host, port):
+    s = "mongodb://" + user + ":" + pwd + "@" + host + ":" + port
     return s
 
 dictFileCont = []  #Defines the content of the JSON data string
 dictMissingState = []
 
 #Setup the database connections
-s = "mongodb://" + DB_USER + ":" + DB_PWD + "@" + HOST + ":" + str(PORT)
+muri = "mongodb://" + DB_USER + ":" + DB_PWD + "@" + HOST + ":" + str(PORT)
 
-print s
-
-mconn = Connection(s)
+mconn = Connection(muri)
 db = mconn[DB_NAME]
-
 
 #get DOL API tokens and secrets
 fl = open("config")  #Open the config file

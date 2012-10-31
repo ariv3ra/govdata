@@ -13,7 +13,7 @@ HOST = os.environ['OPENSHIFT_NOSQL_DB_HOST']
 PORT = int(os.environ['OPENSHIFT_NOSQL_DB_PORT'])
 DB_USER = os.environ['OPENSHIFT_NOSQL_DB_USERNAME']
 DB_PWD = os.environ['OPENSHIFT_NOSQL_DB_PASSWORD']
-DB_NAME = 'dol' #data base name
+DB_NAME = 'govdata' #data base name
 
 app.config['MDB_HOST'] = HOST
 app.config['MDB_PORT'] = PORT
