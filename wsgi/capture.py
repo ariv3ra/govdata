@@ -28,8 +28,11 @@ def createMongoURI(user, pwd, host, port):
 dictFileCont = []  #Defines the content of the JSON data string
 dictMissingState = []
 
-#Setup the database connections
+#Setup the database connections for OpenShift 
 muri = "mongodb://" + DB_USER + ":" + DB_PWD + "@" + HOST + ":" + str(PORT)
+
+#Setup the db connection for local host
+#muri = HOST + ":" + str(PORT)
 
 mconn = Connection(muri)
 db = mconn[DB_NAME]
@@ -70,8 +73,10 @@ while isData(DATASET,TABLE,topval,skipval):
         ep = c[start:end]
         
         t = datetime.datetime.utcfromtimestamp(float(ep)/1000.)
+        yr = t.year
         
         d['dateofincident'] = t # Update the date value
+        d['year'] = int(yr)
 
         ###
         #  Here we are going to parse and separate the values of the companyandlocation field
