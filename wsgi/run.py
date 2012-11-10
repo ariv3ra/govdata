@@ -23,67 +23,32 @@ app.config['MDB_DBNAME'] = DB_NAME
 
 mdb = PyMongo(app, config_prefix='MDB') #Create instance of PyMongo object
 
-#This function capitalizes names separated with spaces
-@app.template_filter("caps")
-def capWords(s):
-    final = []
-    v = s.split()
-    if v:
-        f = v[0].capitalize()
-        l = v[1].capitalize()
-        
-        return  f + " " + l
-    else:
-        return s.capitalize()
+@app.template_filter("frmdate")
+def frmDate(s):
+    d = s.strftime("%m/%d/%Y")
+    return d
 
 @app.route("/")
 @app.route("/index")
 def index():
-    elections = mdb.db.elections.find({"electionyear":2012})
-    title = "U.S. Prez Pol 2012 - Who are you voting for this Election?"
-    #Check if user has already voted
-    voted = None
-    cook = request.cookies.get('vote') #Check for a cookie
-    if cook:
-        voted = True
-        return render_template("results.html", voted = voted)
-    else:
-        voted = False
-        resp = make_response(render_template("index.html", title = title, elections = elections))
-        resp.set_cookie('vote', 'voted', None, datetime.datetime(2012, 11, 8))
-        
-    return resp
+    title = "fatalQuery"  
+    return render_template("index.html", title = title)
 
-#route to post data that is associated in the role collection
-@app.route("/vote", methods=["GET","POST"])
-def vote():    
-    v = request.form['vote'] #Get the data from the post
-    sel = {"pick":v,"timestamp":datetime.datetime.utcnow()}#Build the document to be saved
-    #insert into the mongodb
-    mdb.db.vote.insert(sel)
-    
-    return redirect("/results")
+@app.route("/view", methods=["GET","POST"])
+def view():
+    year = request.form['year']
+    state = request.form['state']
+    result = mdb.db.fatals.find({"$and":[{"year":int(year)},{"state":state}]})
+    count = mdb.db.fatals.find({"$and":[{"year":int(year)},{"state":state}]}).count()
+    return render_template("view.html", year = year, state = state, result = result, count = count)
 
 @app.route("/results", methods=["GET","POST"])
 def results():
-    dem = mdb.db.vote.find({"pick":"obama"}).count()
-    rep = mdb.db.vote.find({"pick":"romney"}).count()
-    lead = None
-    color = None
+    year = request.form['year']
+    state = request.form['state']
     
-    #Check who is in the lead
-    if dem > rep:
-        lead = "Barack Obama is currently in the lead."
-        color = "blue"
-    elif dem < rep:
-        lead = "Mitt Romney is currently in the lead."
-        color = "red"
-    else:
-    #There is a tie
-        lead = "The Candidates are currently tied."
-        color = "black"
-        
-    return render_template("results.html", dem = dem, rep = rep, lead = lead, color = color)
+    results = mdb.db.fatals.find({"$and":[{"year":int(year)},{"state":state}]},{})
+    return render_template("results.html", results = results)
     
 if __name__ == "__main__":
     app.run(debug = "True")

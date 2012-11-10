@@ -1,0 +1,53 @@
+* {font-size:14px; font-family: Helvetica, Arial, sans-serif;}
+body {background-color:#d1d1d1; }
+.header {width:100%; margin:0 0 20px 0;}
+.title {margin: 0 auto; text-align: center;}
+thead {
+	font-weight:bold;
+	color: #FFF;
+	background-color: #b70101;
+	padding:5px 20px;
+	margin:0;
+	border-bottom:5px solid #000;
+}
+thead td {padding:0 10px 0 0;}
+tbody {background-color:#FFF; padding:5px 20px; margin:0; }
+tr { border-bottom:2px solid #000; }
+
+.content {width:850px; margin:0 auto;}
+
+.state {
+	border: 1px solid #000;
+	font-size:14px;
+	color:#000;
+	background:#FFF;
+	padding:5px;
+}
+.death-list {width:800px; margin:0 auto;}
+
+.year {border:1px solid #000; background:#FFF; color:#000; width:100px; margin-right:20px;}
+
+.button {
+  -moz-border-radius: 25px;
+  -moz-box-shadow: #4a4a4a 0px 0px 5px;
+  -webkit-border-radius: 25px;
+  -webkit-box-shadow: #6E7849 0 0 5px;
+  background-color: #b70101;
+  background-image: -moz-linear-gradient(90deg, #dc1c1c, #b70101);
+  background-image: -ms-linear-gradient(90deg, #dc1c1c, #b70101);
+  background-image: -o-linear-gradient(90deg, #dc1c1c, #b70101);
+  background-image: -webkit-linear-gradient(90deg, #dc1c1c, #b70101);
+  background-image: linear-gradient(90deg, #dc1c1c, #b70101);
+  border-radius: 25px;
+  border: 2px solid #000000;
+  box-shadow: #4a4a4a 0px 0px 5px;
+  color: #ffffff;
+  display: inline-block;
+  font-size: inherit;
+  margin: auto;
+  padding: 8px;
+  text-decoration: none;
+}
+.button:hover {
+  background-color: #b70101;
+}

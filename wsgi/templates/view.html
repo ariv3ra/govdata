@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="content">
+    <div class="header">
+	<img class="title" src='static/logo.png' />
+    </div>
+    
+    
+    <div class="deathtable">
+ {% if count == 0 %}
+    <p> No Results Found </p>
+    
+    <a href="/index"><div class="button">Try Again</div></a>
+    
+ {% else %}
+	    <table id="death-list">
+              <thead>
+    	            <tr>
+                        <td>Date of Incident</td>
+	                <td>Company</td>
+                        <td>State</td>
+                        <td>Description</td>
+                  </tr>
+              </thead>
+	      <tbody>
+            {% for r in result %}
+                <tr>
+                        <td>{{r.dateofincident|frmdate}}</td>
+                        <td>{{r.company}}</td>
+                        <td>{{r.state}}</td>
+                        <td>{{r.description}}</td>
+                </tr>
+            {% endfor %}
+  	      </tbody>
+            </table>
+            
+            <a href="/index"><div style="margin:20px 0 0 0;" class="button">Try Again</div></a>
+{% endif %}            
+    </div>
+
+{% endblock %}
