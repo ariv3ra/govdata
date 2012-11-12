@@ -38,7 +38,7 @@ def index():
 def view():
     year = request.form['year']
     state = request.form['state']
-    result = mdb.db.fatals.find({"$and":[{"year":int(year)},{"state":state}]})
+    result = mdb.db.fatals.find({"$and":[{"year":int(year)},{"state":state}]}).sort('dateofincident',1)
     count = mdb.db.fatals.find({"$and":[{"year":int(year)},{"state":state}]}).count()
     return render_template("view.html", year = year, state = state, result = result, count = count)
 
@@ -47,7 +47,7 @@ def results():
     year = request.form['year']
     state = request.form['state']
     
-    results = mdb.db.fatals.find({"$and":[{"year":int(year)},{"state":state}]},{})
+    results = mdb.db.fatals.find({"$and":[{"year":int(year)},{"state":state}]}).sort('dateofincident',1)
     return render_template("results.html", results = results)
     
 if __name__ == "__main__":
